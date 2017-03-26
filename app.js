@@ -22,7 +22,7 @@ app.get('/',stormpath.authenticationRequired,function(req,res){
    res.render("home.html");
 });
 
-app.get('api/test', stormpath.apiAuthenticationRequired,function(req,res){
+/**app.get('api/test', stormpath.apiAuthenticationRequired,function(req,res){
     res.send({test: 'successful!'});
 });
 
@@ -33,8 +33,8 @@ app.get('/api',stormpath.loginRequired, function(req,res,next){
         }
         res.send('API key ID: '+key.id+ 'API key secret: '+key.secret);
     })
-});
+});**/
 
 app.on('stormpath.ready', function(){
-    app.listen(3000);
+    app.listen(proccess.env.PORT || 3000);
 });
