@@ -36,5 +36,5 @@ app.get('/api',stormpath.loginRequired, function(req,res,next){
 });**/
 
 app.on('stormpath.ready', function(){
-    app.listen(proccess.env.PORT || 3000);
+    app.listen(process.env.PORT || 3000);
 });
