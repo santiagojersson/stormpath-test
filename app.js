@@ -4,10 +4,10 @@ var http = require('http');
 var app = express();
 var cons = require('consolidate');
 var path = require ('path');
-app.use(express.static(path.join(__dirname + '../')));
 
-app.engine('html', cons.swig)
-app.set('view engine', 'html');
+app.set('views', path.join(__dirname, 'views'));
+
+app.set('view engine', 'ejs');
 
 
 app.use(stormpath.init(app,{
@@ -17,9 +17,9 @@ app.use(stormpath.init(app,{
     website: true
 }));
 
-app.get('/',stormpath.authenticationRequired,function(req,res){
+app.get('/',stormpath.authenticationRequired,stormpath.getUser,function(req,res){
    // res.send("Hi "+req.user.givenName);
-   res.render("home.html");
+   res.render("home.ejs",{client:req.user.email});
 });
 
 /**app.get('api/test', stormpath.apiAuthenticationRequired,function(req,res){
